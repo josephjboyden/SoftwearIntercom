@@ -1,18 +1,27 @@
 from Audio import Audio
 from Networking import *
-import sys
 from TkinterApp import TkinterApp
+from Printer import *
+import threading
 
-networking = None
-def onHostClicked(port):
-    networking = Server(port)
+audio = Audio()
 
-def onConnectClicked(ip, port):
-    networking = Client(ip, port)
+def onDataRecived(data):
+    print(data.decode("utf-8"))
 
+def audioLoop(ip, hostPort, targetPort, networking):
+    pass
+
+def onConectButtonPressed(ip, hostPort, targetPort):
+    networking = Networking(ip, hostPort, targetPort)
+    networking.onDataRecived = onDataRecived
+    networking.start()
+    networking.sendData("Hello".encode("utf-8"))
+        
+closed = False
 app = TkinterApp()
 
-app.onConnectClicked = onConnectClicked
-app.onHostClicked = onHostClicked
+app.onConectButtonPressed = onConectButtonPressed
 
 app.mainloop()
+closed = True

@@ -14,7 +14,7 @@ class Audio:
 
         self.inputStream = p.open(format = self.FORMAT, channels = self.CHANNELS, rate = self.RATE, input = True)
 
-        self.outputStream = p.open(format = self.FORMAT, channels =self. CHANNELS, rate = self.RATE, output = True)
+        self.outputStream = p.open(format = self.FORMAT, channels = self. CHANNELS, rate = self.RATE, output = True)
     
     def readAudioBytes(self):
         return self.inputStream.read(self.CHUNK)

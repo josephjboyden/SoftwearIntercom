@@ -1,9 +1,8 @@
 import threading
+import builtins
 
-class Printer:
-    def __init__(self):
-        self.lock = threading.Lock()
+lock = threading.Lock()
 
-    def print(message):
-        with self.lock:
-            print(message)
+def print(*args, **kwargs):
+    with lock:
+        builtins.print(*args, **kwargs)
